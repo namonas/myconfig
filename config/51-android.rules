@@ -1,0 +1,26 @@
+SUBSYSTEM=="usb", ATTR{idVendor}=="2207", MODE="0666", GROUP="plugdev"
+# Google
+SUBSYSTEM=="usb", ATTR{idVendor}=="18d1", MODE="0666", GROUP="plugdev"
+# ASUS
+SUBSYSTEM=="usb", ATTR{idVendor}=="0b05", MODE="0666", GROUP="plugdev"
+# NVIDIA
+SUBSYSTEM=="usb", ATTR{idVendor}=="0955", MODE="0666", GROUP="plugdev"
+# HTC
+SUBSYSTEM=="usb", ATTR{idVendor}=="0bb4", MODE="0666", GROUP="plugdev"
+# Huawei
+SUBSYSTEM=="usb", ATTR{idVendor}=="12d1", MODE="0666", GROUP="plugdev"
+# Samsung
+SUBSYSTEM=="usb", ATTR{idVendor}=="04e8", MODE="0666", GROUP="plugdev"
+# Sony
+SUBSYSTEM=="usb", ATTR{idVendor}=="0fce", MODE="0666", GROUP="plugdev"
+# TI
+SUBSYSTEM=="usb", ATTR{idVendor}=="0451", MODE="0666", GROUP="plugdev"
+# Sharp
+SUBSYSTEM=="usb", ATTR{idVendor}=="04dd", MODE="0666", GROUP="plugdev"
+# NEC
+SUBSYSTEM=="usb", ATTR{idVendor}=="0409", MODE="0666", GROUP="plugdev"
+## SUBSYSTEM=="usb", ATTR{idVendor}=="0409", ATTR{idProduct}=="0306", MODE="0666", OWNER="sano"
+## SUBSYSTEM=="usb", ATTR{idVendor}=="0409", ATTR{idProduct}=="0307", MODE="0666", OWNER="sano"
+## SUBSYSTEM=="usb", ATTR{idVendor}=="0409", ATTR{idProduct}=="0354", MODE="0666", OWNER="sano"
+## SUBSYSTEM=="usb", ATTR{idVendor}=="0409", ATTR{idProduct}=="032f", MODE="0666", OWNER="sano"
+

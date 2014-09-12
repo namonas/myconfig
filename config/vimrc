@@ -1,0 +1,219 @@
+set nocompatible "Vi互換をオフにしてVimの機能を有効化する
+
+" --------------------------------
+" NeoBundle Start
+" --------------------------------
+filetype off
+filetype plugin indent off
+
+if has('vim_starting')
+  set runtimepath+=~/.vim/bundle/neobundle.vim/
+  call neobundle#rc(expand('~/.vim/bundle/'))
+endif
+
+" add plugins
+NeoBundle 'Shougo/neobundle.vim'
+NeoBundle 'scrooloose/nerdtree.git'
+NeoBundle 'Shougo/vimproc'
+NeoBundle 'Shougo/vimshell'
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/vimfiler'
+"NeoBundle 'Shougo/neocomplcache'
+"NeoBundle 'Shougo/neosnippet'
+NeoBundle 'rking/ag.vim'
+NeoBundle 'taglist.vim'
+
+filetype plugin indent on
+" --------------------------------
+" NeoBundle End
+" --------------------------------
+
+" --------------------------------
+" NERDTree Start
+" --------------------------------
+let NERDTreeShowHidden=1 "隠しファイルを表示
+" 引数なしの場合はNERDTreeを実行
+let file_name = expand("%:p")
+if has('vim_starting') && file_name == ""
+  autocmd VimEnter * execute 'NERDTree ./'
+endif
+" F2トルグ
+nnoremap <f1> :NERDTreeToggle<CR>
+" 最後に残ったウィンドウがNERDTREEのみのときはvimを閉じる
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+"let g:NERDTreeDirArrows=0
+"let g:NERDTreeMouseMode=0
+
+" カーソルが外れているときは自動的にnerdtreeを隠す
+" function! ExecuteNERDTree()
+"   "b:nerdstatus = 1 : NERDTree 表示中
+"   "b:nerdstatus = 2 : NERDTree 非表示中
+"
+"   if !exists('g:nerdstatus')
+"     execute 'NERDTree ./'
+"     let g:windowWidth = winwidth(winnr())
+"     let g:nerdtreebuf = bufnr('')
+"     let g:nerdstatus = 1
+"
+"   elseif g:nerdstatus == 1
+"     execute 'wincmd t'
+"     execute 'vertical resize' 0
+"     execute 'wincmd p'
+"     let g:nerdstatus = 2
+"   elseif g:nerdstatus == 2
+"     execute 'wincmd t'
+"     execute 'vertical resize' g:windowWidth
+"     let g:nerdstatus = 1
+"   endif
+" endfunction
+" noremap <c-e> :<c-u>:call ExecuteNERDTree()<cr>
+" --------------------------------
+" NERDTree End
+" --------------------------------
+
+" --------------------------------
+" taglist
+" --------------------------------
+nnoremap <f3> :Tlist<CR>
+let Tlist_Show_One_file=1    "現在編集中のソースのタグのみ表示
+let Tlist_Exit_OnlyWindow=1  "taglistのウィンドウが最後のウィンドウならばVimを閉じる
+let Tlist_Use_Right_Window=1 "右側にtaglistのウィンドウを表示
+
+" --------------------------------
+" VimShell
+" --------------------------------
+"nnoremap <silent> vs :VimShell<CR>
+"nnoremap <silent> vp :VimShellPop<CR>
+nnoremap <f2> :VimShellPop<CR>
+let g:vimshell_prompt = $USER . "@" . hostname() . "$ "
+"let g:vimshell_right_prompt = 'vimshell#vcs#info("(%s)-[%b]", "(%s)-[%b|%a]")'
+let g:vimshell_max_command_history = 300
+
+" --------------------------------
+" VimShell
+" --------------------------------
+autocmd QuickFixCmdPost *grep* cwindow
+
+" --------------------------------
+" Common
+" --------------------------------
+colorscheme default
+
+" --------------------------------
+" File
+" --------------------------------
+" set encoding=UTF-8
+set hidden     " ファイル変更中でも他のファイルを開けるようにする
+set noswapfile
+set nobackup
+" set autoread
+
+" --------------------------------
+" Indent
+" --------------------------------
+set shiftwidth =4
+set tabstop    =4     " タブの文字数を設定する
+set softtabstop=0 " ファイル内のTabが対応する空白の数
+set autoindent smartindent
+" set cindent         "C言語のインデントに従って高度な自動インデントを行う
+" set expandtab       "Tabの代わりにSpaceを挿入する。Tabを打つ時は'Ctr-V Tab'。
+" set smarttab        "行頭の余白内でTabを打ち込むと、'shiftwidth'の数だけインデントする
+
+" --------------------------------
+" Find
+" --------------------------------
+" set incsearch  "インクリメンタルサーチを行う
+" set hlsearch   "検索結果をハイライトする
+" set ignorecase "検索時に文字の大小を区別しない
+" set smartcase  "検索時に大文字を含んでいたら大小を区別する
+" set wrapscan   "検索をファイルの先頭へループする
+
+" --------------------------------
+" Input Assist
+" --------------------------------
+set backspace =indent,eol,start
+set clipboard =unnamedplus,autoselect
+set whichwrap =b,s,h,l,<,>,[,] "カーソルを行頭、行末で止まらないようにする
+
+" --------------------------------
+" View
+" --------------------------------
+" colorscheme desert "Vimの色設定
+syntax on            "シンタックスカラーリングを設定する
+set laststatus=2     "ステータスラインを常に表示する
+set number           "行番号を表示する
+set title            "編集中のファイル名を表示する
+set showcmd          "入力中のコマンドを表示する
+set ruler            "ルーラーを表示する
+set showmatch        "閉じ括弧の入力時に対応する括弧を表示する
+" set matchtime  =3    "showmatchの表示時間
+set list             "タブ、行末等の不可視文字を表示する
+set listchars=eol:\ ,tab:>\ ,trail:- "listで表示される文字のフォーマットを指定する
+set statusline=%f:[%l/%L]
+
+" --------------------------------
+" For Japanese
+" --------------------------------
+set ambiwidth=double
+
+" --------------------------------
+" Anywhere SID.
+" --------------------------------
+function! s:SID_PREFIX()
+  return matchstr(expand('<sfile>'), '<SNR>\d\+_\zeSID_PREFIX$')
+  endfunction
+
+" --------------------------------
+" Set TAB Start
+" --------------------------------
+function! s:my_tabline()  "{{{
+  let s = ''
+  for i in range(1, tabpagenr('$'))
+    let bufnrs = tabpagebuflist(i)
+    let bufnr = bufnrs[tabpagewinnr(i) - 1]  " first window, first appears
+    let no = i  " display 0-origin tabpagenr.
+    let mod = getbufvar(bufnr, '&modified') ? '!' : ' '
+    let title = fnamemodify(bufname(bufnr), ':t')
+    let title = '[' . title . ']'
+    let s .= '%'.i.'T'
+    let s .= '%#' . (i == tabpagenr() ? 'TabLineSel' : 'TabLine') . '#'
+    let s .= no . ':' . title
+    let s .= mod
+    let s .= '%#TabLineFill# '
+  endfor
+  let s .= '%#TabLineFill#%T%=%#TabLine#'
+  return s
+endfunction "}}}
+let &tabline = '%!'. s:SID_PREFIX() . 'my_tabline()'
+set showtabline=2 " 常にタブラインを表示
+
+" The prefix key.
+nnoremap    [Tag]   <Nop>
+nmap    t [Tag]
+" Tab jump
+for n in range(1, 9)
+  execute 'nnoremap <silent> [Tag]'.n  ':<C-u>tabnext'.n.'<CR>'
+  endfor
+  " t1 で1番左のタブ、t2 で1番左から2番目のタブにジャンプ
+
+  map <silent> [Tag]c :tablast <bar> tabnew<CR>
+  " tc 新しいタブを一番右に作る
+  map <silent> [Tag]x :tabclose<CR>
+  " tx タブを閉じる
+  map <silent> [Tag]n :tabnext<CR>
+  " tn 次のタブ
+  map <silent> [Tag]p :tabprevious<CR>
+  " tp 前のタブ
+
+" --------------------------------
+" Set TAB End
+" --------------------------------
+
+" --------------------------------
+" Window manage
+" --------------------------------
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-h> <c-w>h
+nnoremap <c-l> <c-w>l
+

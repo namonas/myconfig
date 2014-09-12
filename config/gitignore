@@ -1,0 +1,14 @@
+*.o
+*.a
+*.cmd
+*~
+*.ko
+*.mod
+*.mod.c
+*.symvers
+*.order
+*.builtin
+.*
+buildspeck.mk
+out
+vendor

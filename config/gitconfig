@@ -1,0 +1,15 @@
+[user]
+	name = namonas
+	email = sanoman73@gmail.com
+[color]
+	ui = auto
+[core]
+	editor = vim -c \"set fenc=utf-8\"
+[alias]
+	logs = log --graph --decorate --pretty=format:\"%ad [%cn] <c:%h t:%t p:%p> %n %Cgreen%d%Creset %s %n\" --stat
+
+[http]
+	sslVerify = false
+
+[push]
+	default = simple
