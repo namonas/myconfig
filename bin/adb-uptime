@@ -1,0 +1,17 @@
+#!/bin/sh
+case $# in
+	0)
+		adb shell uptime
+		;;
+	1)
+		while true
+		do
+			adb shell uptime
+			sleep $1
+		done
+		;;
+	*)
+		echo 'not supported format...'
+		;;
+esac
+

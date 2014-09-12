@@ -1,0 +1,20 @@
+#!/bin/sh
+echo "Current wake_lock is:"
+
+case $# in
+	0)
+		adb shell cat /proc/net/route
+		;;
+	1)
+		while true
+		do
+			echo '---- ADB /proc/net/route START ['`date '+%Y/%m/%d %H:%M:%S'`'] ----'
+			adb shell cat /proc/net/route
+			sleep $1
+		done
+		;;
+	*)
+		echo 'not supported format...'
+		;;
+esac
+

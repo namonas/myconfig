@@ -1,0 +1,35 @@
+#!/bin/sh
+HOST_IP=
+
+case $# in
+    0)
+        echo 'specify <On/Off 1:on 0:off>'
+        exit 1
+        ;;
+    1)
+        if [ $1 -eq 1 ]
+		then
+            echo 'specify <On/Off 1:on 0:off> <DEVICE_IP>'
+            exit 1
+		fi
+        ;;
+    2)
+        ;;
+    *)
+        echo 'not supported format...'
+        exit 1
+        ;;
+esac
+
+if [ $1 -eq 1 ]
+then
+    HOST_IP=$2
+fi
+echo 'export ADBHOST='$HOST_IP
+export ADBHOST=$HOST_IP
+echo 'adb kill-server ...'
+adb kill-server
+echo 'adb start-server ...'
+adb start-server
+adb devices
+

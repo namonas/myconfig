@@ -1,0 +1,78 @@
+#!/bin/bash
+
+TARGET_DIR="~/"
+PROJECT_NAME="TMP"
+OUT_TS="YYYYMMDD"
+OUT_PATH=""
+OUT_PATH_PRJ=""
+OUT_PATH_PRJ_BIN=""
+OUT_PATH_PRJ_SRC=""
+SRC_ZIP_NAME=""
+
+case $# in
+	0)
+		echo 'gitexport <output-dir>'
+		exit 1
+		;;
+	1)
+		TARGET_DIR=$1
+		PROJECT_NAME=${PWD##*/}
+		OUT_TS=`date '+%Y%m%d'`
+		OUT_PATH=$TARGET_DIR'/'$OUT_TS'_'$PROJECT_NAME
+		OUT_PATH_PRJ=$OUT_PATH'/'$PROJECT_NAME
+		OUT_PATH_PRJ_BIN=$OUT_PATH'/'$PROJECT_NAME'/bin'
+		OUT_PATH_PRJ_SRC=$OUT_PATH'/'$PROJECT_NAME'/src'
+		SRC_ZIP_NAME=$PROJECT_NAME'_src.tgz'
+		;;
+	*)
+		echo 'gitexport <output-dir>'
+		exit 1
+		;;
+esac
+
+echo '------------------------------------------------------------------'
+echo 'Dst directory: '$TARGET_DIR
+echo 'Src project:   '$PROJECT_NAME
+echo 'Date:          '$OUT_TS
+echo 'Out path:      '$OUT_PATH
+echo ' + Project:    '$OUT_PATH_PRJ
+echo '   + bin:      '$OUT_PATH_PRJ_BIN
+echo '   + src:      '$OUT_PATH_PRJ_SRC
+echo '------------------------------------------------------------------'
+echo
+
+echo 'Step1: Exporting source code ...'
+echo 'git checkout-index -a -f --prefix='$OUT_TS'/'
+`git checkout-index -a -f --prefix=$OUT_TS/`
+echo
+
+echo 'Step2: Making target directories ...'
+echo 'mkdir '$OUT_PATH
+mkdir $OUT_PATH
+echo 'mkdir '$OUT_PATH_PRJ
+mkdir $OUT_PATH_PRJ
+echo 'mkdir '$OUT_PATH_PRJ_BIN
+mkdir $OUT_PATH_PRJ_BIN
+echo 'mkdir '$OUT_PATH_PRJ_SRC
+mkdir $OUT_PATH_PRJ_SRC
+echo
+
+echo 'Step3: Copying binaries ...'
+echo 'cp -a ./bin/*.apk '$OUT_PATH_PRJ_BIN
+`cp -a ./bin/*.apk $OUT_PATH_PRJ_BIN`
+echo
+
+echo 'Step4: Copying source code ...'
+echo 'mv ./'$OUT_TS' '$OUT_PATH_PRJ_SRC'/'$PROJECT_NAME
+`mv ./$OUT_TS $OUT_PATH_PRJ_SRC/$PROJECT_NAME`
+echo
+
+echo 'Step5: Compressing source code ...'
+pushd $OUT_PATH_PRJ_SRC
+echo 'tar cvfz ./'$SRC_ZIP_NAME' ./'$PROJECT_NAME
+tar cvfz ./$SRC_ZIP_NAME ./$PROJECT_NAME
+echo
+popd
+
+echo 'Done!!'
+

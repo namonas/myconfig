@@ -1,0 +1,29 @@
+#!/bin/sh
+ANDROID_IP=172.16.30.89
+HOST_IP=
+
+case $# in
+    0)
+        echo 'please specifier on/off value. 1:on 0:off'
+        exit 1
+        ;;
+    1)
+        ;;
+    *)
+        echo 'not supported format...'
+        exit 1
+        ;;
+esac
+
+if [ $1 -eq 1 ]
+then
+    HOST_IP=$ANDROID_IP
+fi
+echo 'export ADBOST='$HOST_IP
+export ADBHOST=$HOST_IP
+echo 'adb kill-server ...'
+adb kill-server
+echo 'adb start-server ...'
+adb start-server
+adb devices
+

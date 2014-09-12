@@ -1,0 +1,23 @@
+#!/bin/sh
+
+SLEEP_SPAN=5
+
+case $# in
+    0)
+         ;;
+    1)
+         SLEEP_SPAN=$1
+         ;;
+    *)
+         echo 'not supported format...'
+         ;;
+esac
+
+
+while true
+do
+  echo '['`date '+%Y/%m/%d %H:%M:%S'`'] CPU0-Freq: '`adb shell cat /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_cur_freq`
+  echo '['`date '+%Y/%m/%d %H:%M:%S'`'] CPU1-Freq: '`adb shell cat /sys/devices/system/cpu/cpu1/cpufreq/cpuinfo_cur_freq`
+  sleep $SLEEP_SPAN
+done
+

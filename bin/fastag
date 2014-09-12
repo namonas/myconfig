@@ -1,0 +1,17 @@
+#!/bin/bash
+
+case $# in
+	0)
+		echo 'set keyword!!'
+		;;
+	1)
+		ag $1
+		;;
+	2)
+		ag $1 $2
+		;;
+	*)
+		echo 'not supported format...'
+		;;
+esac
+

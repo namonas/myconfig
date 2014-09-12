@@ -1,0 +1,17 @@
+#!/bin/bash
+
+case $# in
+	0)
+		echo 'set keyword!!'
+		;;
+	1)
+		ag $1 -G '.*\.h$'
+		;;
+	2)
+		ag $1 $2 -G '.*\.h$'
+		;;
+	*)
+		echo 'not supported format...'
+		;;
+esac
+

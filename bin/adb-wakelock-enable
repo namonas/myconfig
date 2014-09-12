@@ -1,0 +1,6 @@
+#!/bin/sh
+echo "Disable entering sleep mode"
+adb shell "echo main > /sys/power/wake_lock"
+echo "Current wake_lock is:"
+adb shell cat /sys/power/wake_lock
+

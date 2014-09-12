@@ -1,0 +1,17 @@
+#!/bin/bash
+
+case $# in
+	0)
+		git log --pretty=format:"[%cd by %cn] %s"
+		;;
+	1)
+		git log --pretty=format:"[%cd by %cn] %s" $1
+		;;
+	2)
+		git log -$1 --pretty=format:"[%cd by %cn] %s" $2
+		;;
+	*)
+		echo 'not supported format...'
+		;;
+esac
+

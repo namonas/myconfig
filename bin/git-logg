@@ -1,0 +1,14 @@
+#!/bin/bash
+
+case $# in
+	0)
+		git log --graph --all --color --pretty='%x09%h %cn%x09%s %Cred%d'
+		;;
+	1)
+		git log --graph --all --color --pretty='%x09%h %cn%x09%s %Cred%d' $1
+		;;
+	*)
+		echo 'not supported format...'
+		;;
+esac
+

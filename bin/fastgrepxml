@@ -1,0 +1,17 @@
+#!/bin/bash
+
+case $# in
+	0)
+		echo 'set keyword!!'
+		;;
+	1)
+		find . -type f -name "*.xml" -print0 | xargs -0 grep $1 -n --color /dev/null
+		;;
+	2)
+		find $1 -type f -name "*.xml" -print0 | xargs -0 grep $2 -n --color /dev/null
+		;;
+	*)
+		echo 'not supported format...'
+		;;
+esac
+

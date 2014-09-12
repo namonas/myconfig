@@ -1,0 +1,17 @@
+#!/bin/bash
+
+case $# in
+	0)
+		echo 'set keyword!!'
+		;;
+	1)
+		echo 'set keyword!!'
+		;;
+	2)
+		find . -type f -name "$1" -print0 | xargs -0 grep $2 -n --color /dev/null
+		;;
+	*)
+		echo 'not supported format...'
+		;;
+esac
+

@@ -1,0 +1,19 @@
+#!/bin/sh
+
+case $# in
+	0)
+		;;
+	*)
+		echo 'not supported format...'
+		;;
+esac
+
+echo 'repeat span: '$REPEAT_SPAN'[sec]'
+
+while true
+do
+    echo '---- ADB /proc/meminfo START ['`date '+%Y/%m/%d %H:%M:%S'`'] ----'
+    adb shell cat /proc/meminfo | grep -e Mem -e Active -e Inactive
+    sleep 1
+done
+

@@ -1,0 +1,30 @@
+#!/bin/sh
+
+SLEEP_SPAN=1
+
+case $# in
+    0)
+         ;;
+    1)
+         SLEEP_SPAN=$1
+         ;;
+    *)
+         echo 'not supported format...'
+         ;;
+esac
+
+
+while true
+do
+  echo '----------------------------------------------------------------------------------------------------------'
+  echo '['`date '+%Y/%m/%d %H:%M:%S'`'] CState-0: '`adb shell cat /sys/devices/system/cpu/cpu0/cpuidle/state0/time`
+  echo '['`date '+%Y/%m/%d %H:%M:%S'`'] CState-0: '`adb shell cat /sys/devices/system/cpu/cpu0/cpuidle/state0/usage`
+  echo '['`date '+%Y/%m/%d %H:%M:%S'`'] CState-1: '`adb shell cat /sys/devices/system/cpu/cpu0/cpuidle/state1/time`
+  echo '['`date '+%Y/%m/%d %H:%M:%S'`'] CState-1: '`adb shell cat /sys/devices/system/cpu/cpu0/cpuidle/state1/usage`
+  echo '['`date '+%Y/%m/%d %H:%M:%S'`'] CState-2: '`adb shell cat /sys/devices/system/cpu/cpu0/cpuidle/state2/time`
+  echo '['`date '+%Y/%m/%d %H:%M:%S'`'] CState-2: '`adb shell cat /sys/devices/system/cpu/cpu0/cpuidle/state2/usage`
+  echo '['`date '+%Y/%m/%d %H:%M:%S'`'] CState-3: '`adb shell cat /sys/devices/system/cpu/cpu0/cpuidle/state3/time`
+  echo '['`date '+%Y/%m/%d %H:%M:%S'`'] CState-3: '`adb shell cat /sys/devices/system/cpu/cpu0/cpuidle/state3/usage`
+  sleep $SLEEP_SPAN
+done
+

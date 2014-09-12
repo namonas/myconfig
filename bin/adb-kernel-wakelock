@@ -1,0 +1,19 @@
+#!/bin/sh
+echo "Current wake_lock is:"
+
+case $# in
+	0)
+		adb shell cat /sys/power/wake_lock
+		;;
+	1)
+		while true
+		do
+			adb shell cat /sys/power/wake_lock
+			sleep $1
+		done
+		;;
+	*)
+		echo 'not supported format...'
+		;;
+esac
+

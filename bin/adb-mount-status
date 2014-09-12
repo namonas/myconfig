@@ -1,0 +1,22 @@
+#!/bin/sh
+
+SLEEP_SPAN=1
+
+case $# in
+    0)
+         ;;
+    1)
+         SLEEP_SPAN=$1
+         ;;
+    *)
+         echo 'not supported format...'
+         ;;
+esac
+
+
+while true
+do
+  echo '['`date '+%Y/%m/%d %H:%M:%S'`'] '`adb shell mount | grep system`
+  sleep $SLEEP_SPAN
+done
+
