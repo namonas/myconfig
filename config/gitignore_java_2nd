@@ -1,0 +1,48 @@
+## generic files to ignore
+*~
+*.lock
+*.swp
+*.out
+*.so
+*.log
+
+## java specific
+*.class
+*.dex
+
+## netbeans
+nbproject/build-impl.xml
+nbproject/genfiles.properties
+nbproject/platform.properties
+nbproject/private/
+build/
+dist/
+
+PROPERTIES_DATA/
+
+## Eclipse
+bin/
+gen/
+local.properties
+
+#.classpath
+#.project
+.settings/
+
+## Intellij
+.idea/
+*.iml
+*.iws
+
+## Mac
+.DS_Store
+
+## Maven
+log/
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml

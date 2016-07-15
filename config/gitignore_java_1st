@@ -1,0 +1,40 @@
+## generic files to ignore
+*~
+*.lock
+*.swp
+*.out
+*.so
+*.log
+*.DS_Store
+
+## java specific
+*.class
+*.dex
+
+# netbeans
+nbproject/build-impl.xml
+nbproject/genfiles.properties
+nbproject/platform.properties
+nbproject/private/
+build/
+dist/
+
+PROPERTIES_DATA/
+
+# eclipse
+bin/
+gen/
+local.properties
+
+#.classpath
+#.project
+.settings/
+
+## Other
+map/*.map
+log/*.log
+log/*.bin
+/consolelog/
+/log/
+/log2/
+/log2_/
